@@ -31,6 +31,30 @@ class LoginViewController: UIViewController {
     //MARK: - IB Actions
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         
+        guard let enteredEmail = ibEmailTextField.text else { return }
+        
+        guard isValidEmail(email: enteredEmail) else {
+            alterMessageWithTitle(message: "Please enter the valid email id")
+            return
+        }
+        
+        guard let password = ibPasswordTextField.text else {
+            self.alterMessageWithTitle(message: "Please enter the password", title: "Error")
+            return
+        }
+        
+        let validationMessages = validatePassword(password)
+        
+        if validationMessages.isEmpty {
+            print("Password is valid")
+            loginUser()
+        } else {
+            for message in validationMessages {
+                print(message)
+                // Update UI to display each validation error message
+                alterMessageWithTitle(message: "\(message)", title: "Error")
+            }
+        }
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
@@ -53,6 +77,26 @@ private extension LoginViewController {
         return emailPredicate.evaluate(with: email)
     }
     
+    func validatePassword(_ password: String) -> [String] {
+        var validationMessages: [String] = []
+        
+        if password.count < 8 {
+            validationMessages.append("Password must be at least 8 characters long")
+        }
+        
+        let uppercaseRegex = ".*[A-Z].*"
+        if !NSPredicate(format: "SELF MATCHES %@", uppercaseRegex).evaluate(with: password) {
+            validationMessages.append("Password must contain at least one uppercase letter")
+        }
+        
+        let specialCharRegex = ".*[!@#$%^&*()_+\\-=\\[\\]{};':\",./<>?].*"
+        if !NSPredicate(format: "SELF MATCHES %@", specialCharRegex).evaluate(with: password) {
+            validationMessages.append("Password must contain at least one special character")
+        }
+        
+        return validationMessages
+    }
+    
     func configureViewGesture() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
@@ -69,4 +113,33 @@ private extension LoginViewController {
         ibLoginBtnHolderView.layer.borderWidth = 1
         ibLoginBtnHolderView.layer.borderColor = UIColor("0A0A0A").cgColor
     }
+    
+    func loginUser() {
+        
+        let urlString = "https://4eca-122-172-86-117.ngrok-free.app/api/user/login"
+        let requestBody =   [
+            "email": ibEmailTextField.text ?? "",
+            "password": ibPasswordTextField.text ?? ""
+        ]
+
+        NetworkManager.shared.postRequest(urlString: urlString, parameters: requestBody) { result in
+            switch result {
+            case .success(let data):
+                // Process the POST response data here
+                do {
+                    let response = try JSONDecoder().decode(LoginResponse.self, from: data)
+                    print("Received data: \(response)")
+                    UserStorage.accessToken = response.data?.accessToken ?? ""
+                } catch {
+                    print("Error while decoding")
+                    self.alterMessageWithTitle(message: "Internal Server Error", title: "Error")
+                }
+            case .failure(let error):
+                // Handle the POST request error
+                self.alterMessageWithTitle(message: "Internal Server Error", title: "Error")
+                print("Error: \(error)")
+            }
+        }
+    }
+    
 }

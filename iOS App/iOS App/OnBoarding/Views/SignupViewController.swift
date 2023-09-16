@@ -37,11 +37,6 @@ class SignupViewController: UIViewController {
             self.alterMessageWithTitle(message: "Please enter name", title: "Error")
             return
         }
-        
-//        guard let name = (ibNameTextField.text != nil), let name = ibNameTextField != "" else  {
-//            self.alterMessageWithTitle(message: "Please enter name", title: "Error")
-//            return
-//        }
     
         guard let enteredEmail = ibEmailTextField.text else { return }
         
@@ -74,11 +69,8 @@ class SignupViewController: UIViewController {
         
         if validationMessages.isEmpty {
             print("Password is valid")
-          
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let loginVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-//            self.navigationController?.pushViewController(loginVC, animated: true)
-            
+            registerUser()
+
         } else {
             for message in validationMessages {
                 print(message)
@@ -145,6 +137,35 @@ private extension SignupViewController {
     func configureViewGesture() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func registerUser() {
+        
+        let urlString = "https://4eca-122-172-86-117.ngrok-free.app/api/user/signup"
+        let requestBody =   [
+            "name": ibNameTextField.text ?? "",
+            "email": ibEmailTextField.text ?? "",
+            "phoneNumber": ibPhoneNoTextField.text ?? "",
+            "password": ibPasswordTextField.text ?? "",
+            "address": ibAddressTextField.text ?? ""
+        ]
+
+        NetworkManager.shared.postRequest(urlString: urlString, parameters: requestBody) { result in
+            switch result {
+            case .success(let data):
+                // Process the POST response data here
+                do {
+                    let decodedResponse = try JSONDecoder().decode(UserData.self, from: data)
+                    print("Received data: \(decodedResponse)")
+                    UserStorage.userName = decodedResponse.data?.name ?? ""
+                } catch {
+                    print("Error while decoding")
+                }
+            case .failure(let error):
+                // Handle the POST request error
+                print("Error: \(error)")
+            }
+        }
     }
 }
 
