@@ -3,6 +3,7 @@ import { VStack, Input, Button, FormControl, FormLabel } from "@chakra-ui/react"
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import axios from "axios";
+import "../home.css"
 import { useNavigate } from "react-router-dom"; // Import useHistory from react-router-dom
 
 const CarpoolHomePage = () => {
