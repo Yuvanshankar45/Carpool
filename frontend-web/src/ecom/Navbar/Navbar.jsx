@@ -11,7 +11,12 @@ import {
 import { SearchIcon } from '@chakra-ui/icons';
 
 const Navbar = () => {
+
+    const [ data, setData ] = React.useState("");
   const [isLargerThanTablet] = useMediaQuery('(min-width: 768px)');
+    const handleClick = ()=>{
+        setData()
+    }
 
   return (
     <Box bg="blue.500" p={4}>
@@ -34,7 +39,7 @@ const Navbar = () => {
             <Box color="white">Login</Box>
           </HStack>
         ) : (
-          <Button colorScheme="whiteAlpha" size="sm">
+          <Button colorScheme="whiteAlpha" onClick={handleClick} size="sm">
             Menu
           </Button>
         )}

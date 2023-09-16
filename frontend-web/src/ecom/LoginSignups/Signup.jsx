@@ -37,7 +37,7 @@ const Signup=()=>{
 
     const handelSubmit = (e) => {
         e.preventDefault();
-        axios.post("//API Goes HERE", user).then(res => {if(res.data.mess==="Registred"){navigate("/login")}}).catch((err) => navigate("/login"))
+        axios.post("https://4eca-122-172-86-117.ngrok-free.app/api/user/signup", user).then(res => {if(res.data.mess==="Registred"){navigate("/login")}}).catch((err) => navigate("/login"))
         console.log(user);
         setUser(initialState);
     }

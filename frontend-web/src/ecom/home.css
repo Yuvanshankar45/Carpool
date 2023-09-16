@@ -1,0 +1,70 @@
+/* home.css */
+
+/* Navbar styles */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+  }
+  
+  /* Section styles */
+  .addedData {
+    margin-top: 20px;
+  }
+  
+  .addedData h3 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .addedData h4 {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+
+  /* CarpoolHomePage.css */
+
+.carpool-homepage {
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    background-color: #007BFF;
+    color: #fff;
+    text-align: center;
+    padding: 80px 0;
+  }
+  
+  .header h1 {
+    font-size: 36px;
+    margin: 0;
+  }
+  
+  .header p {
+    font-size: 18px;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px 0;
+  }
+  
+  .feature {
+    text-align: center;
+    width: 30%;
+  }
+  
+  .feature h2 {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  
+  .footer {
+    background-color: #f8f8f8;
+    text-align: center;
+    padding: 20px 0;
+  }
+  
