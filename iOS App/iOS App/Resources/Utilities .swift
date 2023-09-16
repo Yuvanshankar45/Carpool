@@ -146,3 +146,25 @@ extension UIViewController {
         }
     }
 }
+
+extension UIActivityIndicatorView {
+    func startIndicator(in view: UIView) {
+        self.style = .large // You can change the style to your preference
+        self.color = .gray // You can change the color to your preference
+        self.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(self)
+
+        NSLayoutConstraint.activate([
+            self.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            self.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+
+        self.hidesWhenStopped = true
+        self.startAnimating()
+    }
+
+    func stopIndicator() {
+        self.stopAnimating()
+        self.removeFromSuperview()
+    }
+}

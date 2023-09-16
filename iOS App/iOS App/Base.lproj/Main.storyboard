@@ -20,8 +20,7 @@
         <!--Landing View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <viewController id="BYZ-38-t0r" customClass="LandingViewController" customModule="iOS_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LandingViewController" id="BYZ-38-t0r" customClass="LandingViewController" customModule="iOS_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -89,6 +88,7 @@
                         <outlet property="ibSignupButton" destination="Hw0-tx-gkx" id="w7k-wh-zcu"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="367" y="2"/>
         </scene>
@@ -304,7 +304,7 @@
                                 <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bi4-Wg-z6c" customClass="BottomLineTextField" customModule="MedBook" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bi4-Wg-z6c" customClass="BottomLineTextField" customModule="iOS_App" customModuleProvider="target">
                                 <rect key="frame" x="36" y="275" width="321" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -313,7 +313,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartQuotesType="no"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PJ3-4w-8GJ" customClass="BottomLineTextField" customModule="MedBook" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PJ3-4w-8GJ" customClass="BottomLineTextField" customModule="iOS_App" customModuleProvider="target">
                                 <rect key="frame" x="36" y="375" width="321" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -395,11 +395,163 @@
             </objects>
             <point key="canvasLocation" x="1894" y="1"/>
         </scene>
+        <!--Publish-->
+        <scene sceneID="NFQ-ia-hSz">
+            <objects>
+                <viewController storyboardIdentifier="PublishRideViewController" id="wfH-i0-68G" customClass="PublishRideViewController" customModule="iOS_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qEu-u0-e5D">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="jqZ-ji-jYt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Publish" image="plus.circle" catalog="system" id="pFV-3k-9xc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="beU-T2-ymw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4418" y="132"/>
+        </scene>
+        <!--Your rides-->
+        <scene sceneID="6pg-yQ-x5a">
+            <objects>
+                <viewController storyboardIdentifier="YourRideViewController" id="AZq-we-vPS" customClass="YourRideViewController" customModule="iOS_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sPX-Uj-TRV">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Rides" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OIy-R9-f60">
+                                <rect key="frame" x="134.66666666666666" y="407" width="123.99999999999997" height="38.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="nHr-wz-aFg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OIy-R9-f60" firstAttribute="centerX" secondItem="sPX-Uj-TRV" secondAttribute="centerX" id="Afd-KM-KqB"/>
+                            <constraint firstItem="OIy-R9-f60" firstAttribute="centerY" secondItem="sPX-Uj-TRV" secondAttribute="centerY" id="cu5-7U-oWO"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Your rides" image="car" catalog="system" id="CSJ-qG-Cak"/>
+                    <navigationItem key="navigationItem" id="PxM-Pq-6rZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uoB-YV-aQL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5511" y="-261"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="IXX-DG-LsG">
+            <objects>
+                <viewController storyboardIdentifier="SearchRideViewController" id="zvy-Ad-ndq" customClass="SearchRideViewController" customModule="iOS_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JbA-50-Y01">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJB-G6-quw">
+                                <rect key="frame" x="24" y="111" width="349" height="0.0"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Leaving from" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="beM-bb-auW">
+                                <rect key="frame" x="26" y="156" width="341" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="XaA-sL-puV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Going to" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7bV-f5-m5c">
+                                <rect key="frame" x="26" y="233" width="341" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="iLa-zM-lYr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="UQ4-DC-an0">
+                                <rect key="frame" x="26" y="339" width="341" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Agv-Bt-JEq"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="datePickerValueChanged:" destination="zvy-Ad-ndq" eventType="valueChanged" id="jlR-Cc-XKh"/>
+                                </connections>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uk9-5R-CjC">
+                                <rect key="frame" x="26" y="445" width="341" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="esI-yh-Sm3"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Search">
+                                    <fontDescription key="titleFontDescription" type="system" weight="heavy" pointSize="22"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="searchBtnTapped:" destination="zvy-Ad-ndq" eventType="touchUpInside" id="iu6-fK-n5M"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="rrE-g1-mJD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="beM-bb-auW" firstAttribute="top" secondItem="JbA-50-Y01" secondAttribute="top" constant="156" id="5RT-q5-npH"/>
+                            <constraint firstItem="beM-bb-auW" firstAttribute="leading" secondItem="rrE-g1-mJD" secondAttribute="leading" constant="26" id="C45-Fg-pwt"/>
+                            <constraint firstItem="7bV-f5-m5c" firstAttribute="top" secondItem="beM-bb-auW" secondAttribute="bottom" constant="27" id="Kqf-Yn-GYT"/>
+                            <constraint firstItem="uk9-5R-CjC" firstAttribute="top" secondItem="UQ4-DC-an0" secondAttribute="bottom" constant="56" id="Lx8-8v-FR5"/>
+                            <constraint firstAttribute="trailing" secondItem="wJB-G6-quw" secondAttribute="trailing" constant="20" id="Q6T-c6-1Z7"/>
+                            <constraint firstItem="7bV-f5-m5c" firstAttribute="leading" secondItem="beM-bb-auW" secondAttribute="leading" id="QkA-mN-yqf"/>
+                            <constraint firstItem="7bV-f5-m5c" firstAttribute="trailing" secondItem="beM-bb-auW" secondAttribute="trailing" id="XEl-vK-fZu"/>
+                            <constraint firstItem="wJB-G6-quw" firstAttribute="top" secondItem="rrE-g1-mJD" secondAttribute="top" constant="52" id="XH8-1g-reA"/>
+                            <constraint firstItem="rrE-g1-mJD" firstAttribute="trailing" secondItem="uk9-5R-CjC" secondAttribute="trailing" constant="26" id="XWQ-WM-rUj"/>
+                            <constraint firstItem="UQ4-DC-an0" firstAttribute="top" secondItem="7bV-f5-m5c" secondAttribute="bottom" constant="56" id="Yns-Ie-leZ"/>
+                            <constraint firstItem="rrE-g1-mJD" firstAttribute="trailing" secondItem="beM-bb-auW" secondAttribute="trailing" constant="26" id="a2i-Iv-aKc"/>
+                            <constraint firstItem="UQ4-DC-an0" firstAttribute="leading" secondItem="beM-bb-auW" secondAttribute="leading" id="eBu-dj-Y4a"/>
+                            <constraint firstItem="wJB-G6-quw" firstAttribute="leading" secondItem="rrE-g1-mJD" secondAttribute="leading" constant="24" id="gJp-Zk-nlv"/>
+                            <constraint firstItem="uk9-5R-CjC" firstAttribute="leading" secondItem="rrE-g1-mJD" secondAttribute="leading" constant="26" id="rrL-MP-ejo"/>
+                            <constraint firstItem="rrE-g1-mJD" firstAttribute="trailing" secondItem="UQ4-DC-an0" secondAttribute="trailing" constant="26" id="z07-oC-QJe"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="7UN-23-QIX"/>
+                    <connections>
+                        <outlet property="ibDatePicker" destination="UQ4-DC-an0" id="Ki7-O9-n8B"/>
+                        <outlet property="ibFromTextField" destination="beM-bb-auW" id="kIr-9t-6RY"/>
+                        <outlet property="ibToTextField" destination="7bV-f5-m5c" id="ea4-j1-wvK"/>
+                        <outlet property="ibUserNameLabel" destination="wJB-G6-quw" id="7ud-Fw-A84"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T8D-JL-crG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4431" y="-577"/>
+        </scene>
+        <!--Tab Bar-->
+        <scene sceneID="5Ma-dU-WjL">
+            <objects>
+                <tabBarController storyboardIdentifier="TabBar" id="e8y-am-Dx0" customClass="TabBar" customModule="iOS_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9iT-gQ-VLp">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="zvy-Ad-ndq" kind="relationship" relationship="viewControllers" id="36l-8u-O3l"/>
+                        <segue destination="wfH-i0-68G" kind="relationship" relationship="viewControllers" id="T8e-Uf-bGq"/>
+                        <segue destination="AZq-we-vPS" kind="relationship" relationship="viewControllers" id="uHh-dw-5BF"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RQp-3Z-9sp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3512" y="-261"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow.forward" catalog="system" width="128" height="95"/>
+        <image name="car" catalog="system" width="128" height="95"/>
         <image name="carpool" width="500" height="408.5"/>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="plus.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

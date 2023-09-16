@@ -16,7 +16,7 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var ibPhoneNoTextField: BottomLineTextField!
     @IBOutlet weak var ibAddressTextField: BottomLineTextField!
     @IBOutlet weak var ibLetsGoBtnHolderView: UIView!
-
+    let activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,6 @@ class SignupViewController: UIViewController {
     
     //MARK: - IB Actions
     @IBAction func tappedOnLetsGoButton(_ sender: UIButton) {
-        
         if ibNameTextField.text == "" {
             self.alterMessageWithTitle(message: "Please enter name", title: "Error")
             return
@@ -139,7 +138,18 @@ private extension SignupViewController {
         view.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    func pushHomePage() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "TabBar")
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }
+    }
+    
     func registerUser() {
+        DispatchQueue.main.async {
+          self.activityIndicator.startIndicator(in: self.view)
+        }
         
         let urlString = "https://4eca-122-172-86-117.ngrok-free.app/api/user/signup"
         let requestBody =   [
@@ -150,7 +160,7 @@ private extension SignupViewController {
             "address": ibAddressTextField.text ?? ""
         ]
 
-        NetworkManager.shared.postRequest(urlString: urlString, parameters: requestBody) { result in
+        NetworkManager.shared.postRequest(urlString: urlString, parameters: requestBody) { [weak self] result in
             switch result {
             case .success(let data):
                 // Process the POST response data here
@@ -158,11 +168,21 @@ private extension SignupViewController {
                     let decodedResponse = try JSONDecoder().decode(UserData.self, from: data)
                     print("Received data: \(decodedResponse)")
                     UserStorage.userName = decodedResponse.data?.name ?? ""
+                    UserStorage.isLoggedIn = true
+                    DispatchQueue.main.async {
+                        self?.activityIndicator.stopIndicator()
+                    }
+                    self?.pushHomePage()
                 } catch {
+                    DispatchQueue.main.async {
+                        self?.activityIndicator.stopIndicator()
+                    }
                     print("Error while decoding")
                 }
             case .failure(let error):
-                // Handle the POST request error
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopIndicator()
+                }
                 print("Error: \(error)")
             }
         }
@@ -176,6 +196,7 @@ private extension SignupViewController {
 //MARK: - TextField Delegate
 extension SignupViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

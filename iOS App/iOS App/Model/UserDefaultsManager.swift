@@ -14,4 +14,6 @@ struct UserStorage {
     @Storage(key: "accessToken", defaultValue: "")
     static var accessToken: String
     
+    @Storage(key: "isLoggedIn", defaultValue: false)
+    static var isLoggedIn: Bool
 }

@@ -14,12 +14,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var ibEmailTextField: BottomLineTextField!
     @IBOutlet weak var ibPasswordTextField: BottomLineTextField!
     @IBOutlet weak var ibLoginBtnHolderView: UIView!
+    let activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         configureView()
         configureViewGesture()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,21 +32,20 @@ class LoginViewController: UIViewController {
     
     //MARK: - IB Actions
     @IBAction func loginButtonTapped(_ sender: UIButton) {
-        
         guard let enteredEmail = ibEmailTextField.text else { return }
-        
+
         guard isValidEmail(email: enteredEmail) else {
             alterMessageWithTitle(message: "Please enter the valid email id")
             return
         }
-        
+
         guard let password = ibPasswordTextField.text else {
             self.alterMessageWithTitle(message: "Please enter the password", title: "Error")
             return
         }
-        
+
         let validationMessages = validatePassword(password)
-        
+
         if validationMessages.isEmpty {
             print("Password is valid")
             loginUser()
@@ -114,15 +115,25 @@ private extension LoginViewController {
         ibLoginBtnHolderView.layer.borderColor = UIColor("0A0A0A").cgColor
     }
     
+    func pushHomePage() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "TabBar")
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }
+    }
+    
     func loginUser() {
-        
+        DispatchQueue.main.async {
+            self.activityIndicator.startIndicator(in: self.view)
+        }
         let urlString = "https://4eca-122-172-86-117.ngrok-free.app/api/user/login"
         let requestBody =   [
             "email": ibEmailTextField.text ?? "",
             "password": ibPasswordTextField.text ?? ""
         ]
 
-        NetworkManager.shared.postRequest(urlString: urlString, parameters: requestBody) { result in
+        NetworkManager.shared.postRequest(urlString: urlString, parameters: requestBody) { [weak self] result in
             switch result {
             case .success(let data):
                 // Process the POST response data here
@@ -130,13 +141,28 @@ private extension LoginViewController {
                     let response = try JSONDecoder().decode(LoginResponse.self, from: data)
                     print("Received data: \(response)")
                     UserStorage.accessToken = response.data?.accessToken ?? ""
+                    UserStorage.isLoggedIn = true
+                    
+                    if response.success ?? false {
+                        DispatchQueue.main.async {
+                            self?.activityIndicator.stopIndicator()
+                        }
+                        self?.pushHomePage()
+                    } else {
+                        self?.alterMessageWithTitle(message: response.error ?? "", title: "Error")
+                        self?.activityIndicator.stopIndicator()
+                    }
                 } catch {
-                    print("Error while decoding")
-                    self.alterMessageWithTitle(message: "Internal Server Error", title: "Error")
+                    DispatchQueue.main.async {
+                        self?.activityIndicator.stopIndicator()
+                    }
+                    self?.alterMessageWithTitle(message: "Internal Server Error", title: "Error")
                 }
             case .failure(let error):
-                // Handle the POST request error
-                self.alterMessageWithTitle(message: "Internal Server Error", title: "Error")
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopIndicator()
+                }
+                self?.alterMessageWithTitle(message: "Internal Server Error", title: "Error")
                 print("Error: \(error)")
             }
         }
