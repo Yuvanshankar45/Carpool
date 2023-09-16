@@ -1,10 +1,49 @@
-// CarpoolHomePage.js
-
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { VStack, Input, Button, FormControl, FormLabel } from "@chakra-ui/react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Import useHistory from react-router-dom
 
 const CarpoolHomePage = () => {
+  const [fromCity, setFromCity] = useState("");
+  const [toCity, setToCity] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  
+
+
+  const handleFromCityChange = (e) => {
+    setFromCity(e.target.value);
+    if (e.target.value) {
+      fetchSuggestions(e.target.value);
+    }
+  };
+
+  const handleToCityChange = (e) => {
+    setToCity(e.target.value);
+    if (e.target.value) {
+      fetchSuggestions(e.target.value);
+    }
+  };
+
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
+
+  const fetchSuggestions = (input) => {
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`
+      )
+      .then((response) => {
+        setSuggestions(response.data.predictions);
+      })
+      .catch((error) => {
+        console.error("Error fetching suggestions:", error);
+      });
+  };
+
   return (
     <div className="carpool-homepage">
       <Navbar />
@@ -14,29 +53,58 @@ const CarpoolHomePage = () => {
         <p>Share Rides, Reduce Emissions</p>
       </header>
 
-      <section className="features">
-        <div className="feature">
-          <h2>Find Rides</h2>
-          <p>Discover rides going your way and save money.</p>
-        </div>
-
-        <div className="feature">
-          <h2>Offer Rides</h2>
-          <p>Share your ride and reduce your carbon footprint.</p>
-        </div>
-
-        <div className="feature">
-          <h2>Join the Community</h2>
-          <p>Connect with like-minded commuters.</p>
-        </div>
+      <section className="search-form">
+        <h2>Search for Rides</h2>
+        <VStack spacing={4}>
+          <FormControl>
+            <FormLabel htmlFor="fromCity">From City:</FormLabel>
+            <Input
+              type="text"
+              id="fromCity"
+              name="fromCity"
+              value={fromCity}
+              onChange={handleFromCityChange}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel htmlFor="toCity">To City:</FormLabel>
+            <Input
+              type="text"
+              id="toCity"
+              name="toCity"
+              value={toCity}
+              onChange={handleToCityChange}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel htmlFor="selectedDate">Date:</FormLabel>
+            <Input
+              type="date"
+              id="selectedDate"
+              name="selectedDate"
+              value={selectedDate}
+              onChange={handleDateChange}
+            />
+          </FormControl>
+          {suggestions.length > 0 && (
+            <div>
+              <h3>Suggestions:</h3>
+              <ul>
+                {suggestions.map((suggestion) => (
+                  <li key={suggestion.place_id}>{suggestion.description}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <Button colorScheme="teal">Search</Button>
+        </VStack>
       </section>
 
       <footer className="footer">
-      <Footer/>
+        <Footer />
         <p>&copy; 2023 Carpool</p>
       </footer>
     </div>
-   
   );
 };
 
