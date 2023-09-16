@@ -19,6 +19,7 @@ const Navbar = () => {
         {/* Logo */}
         <Box fontSize="2xl" fontWeight="bold" color="white" mr="2px">
           CarPool
+
         </Box>
 
         <Spacer />
