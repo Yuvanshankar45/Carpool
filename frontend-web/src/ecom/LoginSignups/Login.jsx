@@ -30,7 +30,7 @@ const Login=()=>{
             email:mail,
             password:pass
         };
-        axios.post("https://fine-ruby-rattlesnake-suit.cyclic.app/users/login",obj).then(res=>{
+        axios.post("// API GOES HHEREE",obj).then(res=>{
             let resp=res.data;
             console.log(res);
             if(resp==="Inavalid Password"){
