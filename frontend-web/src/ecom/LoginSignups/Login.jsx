@@ -3,6 +3,7 @@ import React from "react";
 // import { Navbar } from "../Components/Navbar/Navbar";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
+import Navbar from "../Navbar/Navbar";
 
 const Login=()=>{
     const [otpAlert, setOtpAlert] = React.useState(false)
@@ -53,14 +54,14 @@ const Login=()=>{
 
 
     return <>
-    {/* <Navbar/> */}
+    <Navbar />
     <div style={{paddingTop:"70px"}}>
     <Grid bg="#FFF5F5" w="100%" h="100vh" display="grid" justifyContent="center" alignItems="center">
         {otpAlert && <Alert status='success'> Otp Sent  </Alert>}
         <Container>
             <Grid w="400px" bg="#FFF" boxShadow="xl">
                 <Grid>
-                    <Image w="400px" h="160px" src="https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/2022/9/6/98b25e23-649a-40e2-8d86-f9b97f441c791662403123928-offer-banner-300-600x240-code-_-MYNTRA200.jpg" alt="" />
+                <img src="https://static.vecteezy.com/system/resources/previews/000/143/153/original/carpool-vector.jpg" width="100%" height="60%" alt="Carpool Image" />
                 </Grid>
                 <Grid gap={5} p={8} display="grid" justifyContent="center">
 
